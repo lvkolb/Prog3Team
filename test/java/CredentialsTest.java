@@ -11,5 +11,11 @@ class CredentialsTest {
 
         Credentials credentials2 = new Credentials("hofmannol", "GERONIMO");
         assertTrue(credentials2.valid());
+
+        Credentials credentials3 = new Credentials("Hans", "1234");
+        assertFalse(credentials3.valid());
+
+        Credentials credentials4 = new Credentials("hofmannol", "1234");
+        assertFalse(credentials4.valid());
     }
 }
