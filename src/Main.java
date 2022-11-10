@@ -1,3 +1,4 @@
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Main {
@@ -5,9 +6,8 @@ public class Main {
 
         int maxAttempt = 3;
         int currentAttempt = 0;
-        Scanner s = new Scanner(System.in);
 
-        if(login(maxAttempt, currentAttempt, s)){
+        if(login(maxAttempt, currentAttempt, System.in)){
             System.out.println("Success!");
         }
         else{
@@ -15,8 +15,9 @@ public class Main {
         }
     }
 
-    private static boolean login(int maxAttempt, int currentAttempt, Scanner s) {
+    private static boolean login(int maxAttempt, int currentAttempt, InputStream in) {
         boolean checker = false;
+        Scanner s = new Scanner(in);
         while(currentAttempt < maxAttempt){
 
             System.out.print("Benutzername: ");
@@ -28,7 +29,6 @@ public class Main {
             Credentials userdata = new Credentials(login,pwd);
 
             if(userdata.valid()){
-                s.close();
                 currentAttempt = maxAttempt;
                 checker = true;
             }
@@ -36,6 +36,7 @@ public class Main {
                 currentAttempt++;
             }
         }
+        s.close();
         return checker;
     }
 }
